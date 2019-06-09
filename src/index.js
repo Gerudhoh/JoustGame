@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import logoImg from "./assets/logo.png";
+import jousterImg from "./assets/jouster.png";
 
 const config = {
   type: Phaser.AUTO,
@@ -15,18 +15,25 @@ const config = {
 const game = new Phaser.Game(config);
 
 function preload() {
-  this.load.image("logo", logoImg);
+  this.load.spritesheet("jouster", jousterImg, {frameWidth: 60, frameHeight: 74});
 }
 
 function create() {
-  const logo = this.add.image(400, 150, "logo");
-
-  this.tweens.add({
-    targets: logo,
-    y: 450,
-    duration: 2000,
-    ease: "Power2",
-    yoyo: true,
-    loop: -1
+  let jouster = this.add.sprite(300, 200, "jouster", 0);
+  this.anims.create({
+  	key: 'running',
+  	repeat: -1,
+  	frameRate: 10,
+  	frames: this.anims.generateFrameNames('jouster', {start: 1, end: 4})
   });
+  this.anims.create({
+  	key: 'attacking',
+  	repeat: -1,
+  	frameRate: 10,
+  	frames: this.anims.generateFrameNames('jouster', {start: 10, end: 19})
+  });
+
+  jouster.play('attacking');
+  let jouster2 = this.add.sprite(500, 200, "jouster", 0);
+  jouster2.play('running');
 }
