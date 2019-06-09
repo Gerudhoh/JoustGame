@@ -1,10 +1,13 @@
-import TitleScreen from "./title.js"
-import GameScreen from "./game.js"
+//imports for scenes
+import TitleScreen from "./scenes/title.js"
+import GameScreen from "./scenes/game.js"
 
+//Creates the config for the game
 const config = {
     type: Phaser.AUTO,
     width: 800,
     height: 600,
+    //Loads in all scenes for the game, first scene is the one that gets loaded by default
     scene: [TitleScreen, GameScreen],
     physics: {
     	 default: "arcade",

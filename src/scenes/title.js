@@ -1,4 +1,4 @@
-import jousterImg from "./assets/jouster.png";
+import jousterImg from "../assets/jouster.png";
 
 class TitleScreen extends Phaser.Scene {
 	constructor() {
