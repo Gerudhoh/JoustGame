@@ -10,12 +10,12 @@ class TitleScreen extends Phaser.Scene {
 	preload() {
 		//load in the spritesheet for testing
 	  	this.load.spritesheet("jouster", jousterImg, {frameWidth: 60, frameHeight: 74});
-	  	this.load.spritesheet("sword1", swordImg, {frameWidth: 100, frameHeight: 75});
+	  	this.load.spritesheet("sword1", swordImg, {frameWidth: 100, frameHeight: 100});
 	}
 
 	create() {
 		//testing for sprites of players
-	 	let jouster = this.add.sprite(300, 200, "jouster", 0);
+	 	let jouster = this.add.sprite(300, 200, "sword1", 5);
 
 	 	//running animation goes here
 	  	this.anims.create({
@@ -33,11 +33,11 @@ class TitleScreen extends Phaser.Scene {
 		  	//repeat -1 means it loops
 		  	repeat: -1,
 		  	frameRate: 10,
-		  	frames: this.anims.generateFrameNames('jouster', {start: 10, end: 19})
+		  	frames: this.anims.generateFrameNames('sword1', {start: 6, end: 24})
 	  	});
 
 	  	//play the 2 animations to test them
-	  	//jouster.play('attacking');
+	  	jouster.play('attacking');
 	  	let jouster2 = this.add.sprite(500, 200, "sword1", 0);
 	  	jouster2.play('running');
 
