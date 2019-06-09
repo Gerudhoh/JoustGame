@@ -1,7 +1,11 @@
+//Creates phaser class for the scene
 class GameScreen extends Phaser.Scene {
+
 	constructor() {
+		//the key that references this class, which is used by other functions
 		super('GameScreen')
 	}
+
 	preload() {
 	  	
 	}
@@ -12,4 +16,5 @@ class GameScreen extends Phaser.Scene {
 	}
 }
 
+//exports the scene so config can load it
 export default GameScreen;
