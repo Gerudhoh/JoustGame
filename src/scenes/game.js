@@ -29,6 +29,7 @@ class GameScreen extends Phaser.Scene {
 
 		//Because we get a spritesheet object from the character select screen, we need to create the sprite based off of that object.
 		let jousterLeft = this.physics.add.sprite(this.choiceLeft.x, this.choiceLeft.y, this.choiceLeft.texture.key, this.choiceLeft.frame.name);
+		jousterLeft.flipX = true;
 		let jousterRight = this.physics.add.sprite(this.choiceRight.x, this.choiceRight.y, this.choiceRight.texture.key, this.choiceRight.frame.name);
 
 		//This is an attempt to create a unified animation so we don't need spaghetti code
@@ -51,10 +52,29 @@ class GameScreen extends Phaser.Scene {
 			 frames: this.anims.generateFrameNames(this.choiceRight.texture.key, {start: this.rightFrameArray[0], end: this.rightFrameArray[1]})
 		 });
 
+		this.anims.create({
+		key: 'attackingLeft',
+		//repeat -1 means it loops
 
-		
-		jousterLeft.play('runningLeft');
-		jousterRight.play('runningRight');
+			 repeat: -1,
+			 frameRate: 10,
+			 //Basically you get the key of the certain texture, and using the array passed from the character selection, determine the beginning and end frames
+			 frames: this.anims.generateFrameNames(this.choiceLeft.texture.key, {start: this.leftFrameArray[2], end: this.leftFrameArray[3]})
+		 });
+
+		this.anims.create({
+		key: 'attackingRight',
+		//repeat -1 means it loops
+			 repeat: -1,
+			 frameRate: 10,
+			 //Basically you get the key of the certain texture, and using the array passed from the character selection, determine the beginning and end frames
+			 frames: this.anims.generateFrameNames(this.choiceRight.texture.key, {start: this.rightFrameArray[2], end: this.rightFrameArray[3]})
+		 });
+
+
+
+		jousterLeft.play('attackingLeft');
+		jousterRight.play('attackingRight');
 
 	  	let titleText = this.add.text(100, 400, "Now Playing Game");
 	}

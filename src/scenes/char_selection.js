@@ -107,44 +107,51 @@ class SelectionScreen extends Phaser.Scene {
 
 		//Event listeners for when the specific character portraits are clicked.
 		//Update the text stating which character is currently selected
-		portrait1.on('pointerup', function (event) {
+		portrait1.on('pointerdown', function (event) {
 			playerChoice = this.physics.add.sprite(xPos, yPos, "Isadora", 5);
+			playerChoice.visible = false;
 			choiceFrames = [0, 4, 6, 24];
 			selectedClass.setText('Selected Isadora');
 		}, this);
 
-		portrait2.on('pointerup', function (event) {
+		portrait2.on('pointerdown', function (event) {
 			playerChoice = this.physics.add.sprite(xPos, yPos, "Forde", 5);
+			playerChoice.visible = false;
 			choiceFrames = [0, 4, 6, 24];
 			selectedClass.setText('Selected Forde');
 		}, this);
 
-		portrait3.on('pointerup', function (event) {
+		portrait3.on('pointerdown', function (event) {
 			playerChoice = this.physics.add.sprite(xPos, yPos, "Sain", 5);
+			playerChoice.visible = false;
 			choiceFrames = [0, 4, 6, 27];
 			selectedClass.setText('Selected Sain');
 		}, this);
 
-		portrait4.on('pointerup', function (event) {
+		portrait4.on('pointerdown', function (event) {
 			playerChoice = this.physics.add.sprite(xPos, yPos, "Eliwood", 3);
+			playerChoice.visible = false;
 			choiceFrames = [0, 2, 4, 20];
 			selectedClass.setText('Selected Eliwood');
 		}, this);
 
-		portrait5.on('pointerup', function (event) {
+		portrait5.on('pointerdown', function (event) {
 			playerChoice = this.physics.add.sprite(xPos, yPos, "Kent", 5);
+			playerChoice.visible = false;
 			choiceFrames = [0, 4, 6, 25];
 			selectedClass.setText('Selected Kent');
 		}, this);
-		
-		portrait6.on('pointerup', function (event) {
+
+		portrait6.on('pointerdown', function (event) {
 			playerChoice = this.physics.add.sprite(xPos, yPos, "Marcus", 5);
+			playerChoice.visible = false;
 			choiceFrames = [0, 4, 6, 25];
 			selectedClass.setText('Selected Marcus');
 		}, this);
 
 		//Swap to the actual game
-		playButton.on('pointerup', function (event) {
+		playButton.on('pointerdown', function (event) {
+			//Swap to second player's choice
 			if ((currentPlayer ==  "1") && (playerChoice != null)) {
 				currentPlayer = "2";
 				player1Selected = playerChoice;
@@ -154,6 +161,7 @@ class SelectionScreen extends Phaser.Scene {
 				selectedClass.setText('No class selected');
 				currentPlayerText.setText('Player 2, please select your character.')
 			}
+			//Swap to game and transfer info
 			else if ((currentPlayer ==  "2") && (playerChoice != null)){
 				player2Selected = playerChoice;
 				player2Frames = choiceFrames;
