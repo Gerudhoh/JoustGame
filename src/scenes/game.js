@@ -1,11 +1,13 @@
 import swordImg1 from "../assets/sword1.png";
 import swordImg2 from "../assets/sword2.png";
 import backgroundImg from "../assets/background.png";
+import strengthWheel from "../assets/strength.png";
 
 var jousterLeft;
 var jousterRight;
 var cursors;
 var rightButton;
+var StrengthWheel;
 //Creates phaser class for the scene
 class GameScreen extends Phaser.Scene {
 
@@ -18,6 +20,7 @@ class GameScreen extends Phaser.Scene {
 		this.load.spritesheet("sword1", swordImg1, {frameWidth: 100, frameHeight: 100});
 		this.load.spritesheet("sword2", swordImg2, {frameWidth: 100, frameHeight: 100});
 		this.load.image('background', backgroundImg, {frameWidth: 500, frameHeight: 500});
+		this.load.image('strengthWheel', strengthWheel, {frameWidth: 68, frameHeight: 68});
 	}
 
 	create() {
@@ -27,6 +30,17 @@ class GameScreen extends Phaser.Scene {
 		  
 		jousterRight = this.physics.add.sprite(700, 400, "sword1", 5);
 		jousterLeft = this.physics.add.sprite(100, 450, "sword2", 1);
+		StrengthWheel = this.add.sprite(200,200, "strengthWheel", 0);
+
+		this.anims.create({
+			key: 'spinning',
+			//repeat -1 means it loops
+   
+				 repeat: -1,
+				 frameRate: 10,
+				 frames: this.anims.generateFrameNames('strengthWheel', {start: 0, end: 2})
+			 });
+			 StrengthWheel.play('spinning');
 
 		  this.anims.create({
 			key: 'runningLeft',
