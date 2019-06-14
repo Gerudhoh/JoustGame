@@ -7,6 +7,13 @@ import axe1Portrait from "../assets/axe1Portrait.png";
 import axe2Portrait from "../assets/axe2Portrait.png";
 import startButton from "../assets/startButton.jpg";
 
+import lanceImg1 from "../assets/lance1.png";
+import lanceImg2 from "../assets/lance2.png";
+import swordImg1 from "../assets/sword2.png";
+import swordImg2 from "../assets/sword1.png";
+import axeImg1 from "../assets/axe1.png";
+import axeImg2 from "../assets/axe2.png";
+
 //Custom Button class for Phaser 3
 class Button extends Phaser.GameObjects.Image { 
 	//When creating a new custom button, follow the format below:
@@ -61,13 +68,29 @@ class SelectionScreen extends Phaser.Scene {
 		this.load.image("button5", axe1Portrait);
 		this.load.image("button6", axe2Portrait);
 		this.load.image("startButton", startButton);
+
+		this.load.spritesheet("Sain", lanceImg1, {frameWidth: 100, frameHeight: 100});
+	  	this.load.spritesheet("Eliwood", lanceImg2, {frameWidth: 100, frameHeight: 100});
+	  	this.load.spritesheet("Isadora", swordImg2, {frameWidth: 100, frameHeight: 100});
+	  	this.load.spritesheet("Forde", swordImg1, {frameWidth: 100, frameHeight: 100});
+	  	this.load.spritesheet("Kent", axeImg1, {frameWidth: 100, frameHeight: 100});
+	  	this.load.spritesheet("Marcus", axeImg2, {frameWidth: 100, frameHeight: 100});
 	}
 
 	create() {
-		let playerChoice = "no selection";
+
+		let playerChoice = null;
 		let currentPlayer = "1";
+		//Variables for where the sprite's location is
+		let xPos = 100;
+		let yPos = 450;
+
+		//Temporary variables for passing in values to game.js
 		let player1Selected;
 		let player2Selected;
+		let player1Frames;
+		let player2Frames;
+		let choiceFrames;
 
 		//Text goes here
 		var selectedClass = this.add.text(350, 450, 'No class selected');
@@ -85,42 +108,56 @@ class SelectionScreen extends Phaser.Scene {
 		//Event listeners for when the specific character portraits are clicked.
 		//Update the text stating which character is currently selected
 		portrait1.on('pointerup', function (event) {
-			playerChoice = "Isadora";
+			playerChoice = this.physics.add.sprite(xPos, yPos, "Isadora", 5);
+			choiceFrames = [0, 4, 6, 24];
 			selectedClass.setText('Selected Isadora');
-		});
+		}, this);
+
 		portrait2.on('pointerup', function (event) {
-			playerChoice = "Forde";
+			playerChoice = this.physics.add.sprite(xPos, yPos, "Forde", 5);
+			choiceFrames = [0, 4, 6, 24];
 			selectedClass.setText('Selected Forde');
-		});
+		}, this);
+
 		portrait3.on('pointerup', function (event) {
-			playerChoice = "Sain";
+			playerChoice = this.physics.add.sprite(xPos, yPos, "Sain", 5);
+			choiceFrames = [0, 4, 6, 27];
 			selectedClass.setText('Selected Sain');
-		});
+		}, this);
+
 		portrait4.on('pointerup', function (event) {
-			playerChoice = "Eliwood";
+			playerChoice = this.physics.add.sprite(xPos, yPos, "Eliwood", 3);
+			choiceFrames = [0, 2, 4, 20];
 			selectedClass.setText('Selected Eliwood');
-		});
+		}, this);
+
 		portrait5.on('pointerup', function (event) {
-			playerChoice = "Kent";
+			playerChoice = this.physics.add.sprite(xPos, yPos, "Kent", 5);
+			choiceFrames = [0, 4, 6, 25];
 			selectedClass.setText('Selected Kent');
-		});
+		}, this);
+		
 		portrait6.on('pointerup', function (event) {
-			playerChoice = "Marcus";
+			playerChoice = this.physics.add.sprite(xPos, yPos, "Marcus", 5);
+			choiceFrames = [0, 4, 6, 25];
 			selectedClass.setText('Selected Marcus');
-		});
+		}, this);
 
 		//Swap to the actual game
 		playButton.on('pointerup', function (event) {
-			if ((currentPlayer ==  "1") && (playerChoice != "no selection")) {
+			if ((currentPlayer ==  "1") && (playerChoice != null)) {
 				currentPlayer = "2";
 				player1Selected = playerChoice;
-				playerChoice = "no selection";
+				player1Frames = choiceFrames;
+				xPos = 700;
+				playerChoice = null;
 				selectedClass.setText('No class selected');
 				currentPlayerText.setText('Player 2, please select your character.')
 			}
-			else if ((currentPlayer ==  "2") && (playerChoice != "no selection")){
+			else if ((currentPlayer ==  "2") && (playerChoice != null)){
 				player2Selected = playerChoice;
-				this.scene.start("GameScreen", {player1Choice: player1Selected, player2Choice: player2Selected});
+				player2Frames = choiceFrames;
+				this.scene.start("GameScreen", {playerLeftChoice: player1Selected, playerRightChoice: player2Selected, playerLeftFrames: player1Frames, playerRightFrames: player2Frames});
 			}
 		}, this);
 	}
