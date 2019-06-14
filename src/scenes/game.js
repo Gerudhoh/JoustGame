@@ -6,7 +6,6 @@ var jousterLeft;
 var jousterRight;
 var cursors;
 var rightButton;
-
 //Creates phaser class for the scene
 class GameScreen extends Phaser.Scene {
 
@@ -53,6 +52,10 @@ class GameScreen extends Phaser.Scene {
 			
 	}
 	update(){
+
+		if(jousterRight.x < 0 || jousterLeft.x > 1000){
+			this.scene.restart();
+		}
 
 		if (cursors.left.isDown)	
 		{
