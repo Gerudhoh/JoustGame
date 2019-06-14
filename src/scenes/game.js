@@ -2,6 +2,11 @@ import swordImg1 from "../assets/sword1.png";
 import swordImg2 from "../assets/sword2.png";
 import backgroundImg from "../assets/background.png";
 
+var jousterLeft;
+var jousterRight;
+var cursors;
+var rightButton;
+
 //Creates phaser class for the scene
 class GameScreen extends Phaser.Scene {
 
@@ -18,11 +23,12 @@ class GameScreen extends Phaser.Scene {
 
 	create() {
 	 	
-		  let titleText = this.add.text(50, 550, "Now Playing Game");
-		  this.add.image(400, 300, 'background');
+		let titleText = this.add.text(50, 550, "Now Playing Game");
+		this.add.image(400, 300, 'background');
 		  
-		  let jousterRight = this.physics.add.sprite(700, 400, "sword1", 5);
-		  
+		jousterRight = this.physics.add.sprite(700, 400, "sword1", 5);
+		jousterLeft = this.physics.add.sprite(100, 450, "sword2", 1);
+
 		  this.anims.create({
 			key: 'runningLeft',
 			//repeat -1 means it loops
@@ -31,9 +37,7 @@ class GameScreen extends Phaser.Scene {
 				 frameRate: 10,
 				 frames: this.anims.generateFrameNames('sword1', {start: 0, end: 4})
 			 });
-			// jousterRight.play('runningLeft');
 
-			let jousterLeft = this.physics.add.sprite(100, 450, "sword2", 0);
 			 this.anims.create({
 				key: 'runningRight',
 				//repeat -1 means it loops
@@ -42,20 +46,32 @@ class GameScreen extends Phaser.Scene {
 					 frameRate: 10,
 					 frames: this.anims.generateFrameNames('sword2', {start: 0, end: 4})
 				 });
-			  jousterLeft.play('runningRight');
+
+			   //  Input Events
 			  cursors = this.input.keyboard.createCursorKeys();
+			  rightButton = this.input.keyboard.addKey('D');
 			
 	}
-	update(time, delta){
+	update(){
 
 		if (cursors.left.isDown)	
 		{
     		jousterRight.body.setVelocityX(-160);
-			jousterRight.play('runningLeft');
+			jousterRight.play('runningLeft', true);
 		}
 		else
 		{
     		jousterRight.setVelocityX(0);
+		}
+
+	if (rightButton.isDown)	
+		{
+    		jousterLeft.body.setVelocityX(160);
+			jousterLeft.play('runningRight', true);
+		}
+		else
+		{
+    		jousterLeft.setVelocityX(0);
 		}
 
 	}
