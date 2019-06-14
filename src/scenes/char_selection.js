@@ -56,24 +56,44 @@ class SelectionScreen extends Phaser.Scene {
 	}
 
 	create() {
-		var selectedClass = this.add.text(300, 300, 'No class selected');
+		let playerChoice = "no selection";
+		let currentPlayer = "1";
+		let player1Selected;
+		let player2Selected;
+
+		//Text goes here
+		var selectedClass = this.add.text(350, 300, 'No class selected');
+		var currentPlayerText = this.add.text(250, 0, 'Player 1, please select your character.');
+
 		//custom buttons for character classes are here
-		let portrait1 = new Button(this, 100, 100, 100, 100, "button1", this.buttonCallback);
-		let portrait2 = new Button(this, 210, 100, 100, 100, "button2", this.buttonCallback);
-		let playButton = new Button(this, 300, 400, 200, 50, "startButton", this.buttonCallback);
+		let portrait1 = new Button(this, 200, 200, 150, 150, "button1", this.buttonCallback);
+		let portrait2 = new Button(this, 360, 200, 150, 150, "button2", this.buttonCallback);
+		let playButton = new Button(this, 400, 500, 200, 50, "startButton", this.buttonCallback);
 
 		//Event listeners for when the specific character portraits are clicked.
 		//Update the text stating which character is currently selected
 		portrait1.on('pointerup', function (event) {
+			playerChoice = "Eliwood";
 			selectedClass.setText('Selected Eliwood');
 		});
 		portrait2.on('pointerup', function (event) {
+			playerChoice = "Forde";
 			selectedClass.setText('Selected Forde');
 		});
 
 		//Swap to the actual game
 		playButton.on('pointerup', function (event) {
-		  this.scene.start("GameScreen");
+			if ((currentPlayer ==  "1") && (playerChoice != "no selection")) {
+				currentPlayer = "2";
+				player1Selected = playerChoice;
+				playerChoice = "no selection";
+				selectedClass.setText('No class selected');
+				currentPlayerText.setText('Player 2, please select your character.')
+			}
+			else if ((currentPlayer ==  "2") && (playerChoice != "no selection")){
+				player2Selected = playerChoice;
+				this.scene.start("GameScreen", {player1Choice: player1Selected, player2SChoice: player2Selected});
+			}
 		}, this);
 	}
 
