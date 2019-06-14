@@ -17,12 +17,12 @@ class GameScreen extends Phaser.Scene {
 	}
 
 	create() {
-		 
-		jousterRight = this.add.sprite(700, 400, "sword1", 5);
-		jousterLeft = this.add.sprite(100, 450, "sword2", 0);
+	 	
 		  let titleText = this.add.text(50, 550, "Now Playing Game");
 		  this.add.image(400, 300, 'background');
-
+		  
+		  let jousterRight = this.physics.add.sprite(700, 400, "sword1", 5);
+		  
 		  this.anims.create({
 			key: 'runningLeft',
 			//repeat -1 means it loops
@@ -31,8 +31,9 @@ class GameScreen extends Phaser.Scene {
 				 frameRate: 10,
 				 frames: this.anims.generateFrameNames('sword1', {start: 0, end: 4})
 			 });
-			 jousterRight.play('runningLeft');
-			
+			// jousterRight.play('runningLeft');
+
+			let jousterLeft = this.physics.add.sprite(100, 450, "sword2", 0);
 			 this.anims.create({
 				key: 'runningRight',
 				//repeat -1 means it loops
@@ -42,27 +43,22 @@ class GameScreen extends Phaser.Scene {
 					 frames: this.anims.generateFrameNames('sword2', {start: 0, end: 4})
 				 });
 			  jousterLeft.play('runningRight');
+			  cursors = this.input.keyboard.createCursorKeys();
 			
 	}
+	update(time, delta){
 
-/*	update() {
-	
-		jousterLeft.body.velocity.x = 0;
-		jousterRight.body.velocity.x = 0;
-	
-		if (cursors.left.isDown)
+		if (cursors.left.isDown)	
 		{
-			jousterRight.body.velocity.x = -150;
+    		jousterRight.body.setVelocityX(-160);
 			jousterRight.play('runningLeft');
 		}
 		else
 		{
-			jousterRight.body.velocity.x = 0;
-			jousterRight.animations.stop();
-
+    		jousterRight.setVelocityX(0);
 		}
-	
-	}*/
+
+	}
 }
 
 //exports the scene so config can load it
