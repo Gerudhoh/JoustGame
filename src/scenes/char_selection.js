@@ -1,6 +1,10 @@
 //Import statements
+import lance1Portrait from "../assets/lance1Portrait.png";
 import lance2Portrait from "../assets/lance2Portrait.png";
+import sword1Portrait from "../assets/sword1Portrait.png";
 import sword2Portrait from "../assets/sword2Portrait.png";
+import axe1Portrait from "../assets/axe1Portrait.png";
+import axe2Portrait from "../assets/axe2Portrait.png";
 import startButton from "../assets/startButton.jpg";
 
 //Custom Button class for Phaser 3
@@ -50,8 +54,12 @@ class SelectionScreen extends Phaser.Scene {
 	}
 
 	preload() {
-		this.load.image("button1", lance2Portrait);
+		this.load.image("button1", sword1Portrait);
 		this.load.image("button2", sword2Portrait);
+		this.load.image("button3", lance1Portrait);
+		this.load.image("button4", lance2Portrait);
+		this.load.image("button5", axe1Portrait);
+		this.load.image("button6", axe2Portrait);
 		this.load.image("startButton", startButton);
 	}
 
@@ -62,23 +70,43 @@ class SelectionScreen extends Phaser.Scene {
 		let player2Selected;
 
 		//Text goes here
-		var selectedClass = this.add.text(350, 300, 'No class selected');
+		var selectedClass = this.add.text(350, 450, 'No class selected');
 		var currentPlayerText = this.add.text(250, 0, 'Player 1, please select your character.');
 
 		//custom buttons for character classes are here
-		let portrait1 = new Button(this, 200, 200, 150, 150, "button1", this.buttonCallback);
-		let portrait2 = new Button(this, 360, 200, 150, 150, "button2", this.buttonCallback);
+		let portrait1 = new Button(this, 200, 100, 150, 150, "button1", this.buttonCallback);
+		let portrait2 = new Button(this, 360, 100, 150, 150, "button2", this.buttonCallback);
+		let portrait3 = new Button(this, 520, 100, 150, 150, "button3", this.buttonCallback);
+		let portrait4 = new Button(this, 200, 260, 150, 150, "button4", this.buttonCallback);
+		let portrait5 = new Button(this, 360, 260, 150, 150, "button5", this.buttonCallback);
+		let portrait6 = new Button(this, 520, 260, 150, 150, "button6", this.buttonCallback);
 		let playButton = new Button(this, 400, 500, 200, 50, "startButton", this.buttonCallback);
 
 		//Event listeners for when the specific character portraits are clicked.
 		//Update the text stating which character is currently selected
 		portrait1.on('pointerup', function (event) {
-			playerChoice = "Eliwood";
-			selectedClass.setText('Selected Eliwood');
+			playerChoice = "Isadora";
+			selectedClass.setText('Selected Isadora');
 		});
 		portrait2.on('pointerup', function (event) {
 			playerChoice = "Forde";
 			selectedClass.setText('Selected Forde');
+		});
+		portrait3.on('pointerup', function (event) {
+			playerChoice = "Sain";
+			selectedClass.setText('Selected Sain');
+		});
+		portrait4.on('pointerup', function (event) {
+			playerChoice = "Eliwood";
+			selectedClass.setText('Selected Eliwood');
+		});
+		portrait5.on('pointerup', function (event) {
+			playerChoice = "Kent";
+			selectedClass.setText('Selected Kent');
+		});
+		portrait6.on('pointerup', function (event) {
+			playerChoice = "Marcus";
+			selectedClass.setText('Selected Marcus');
 		});
 
 		//Swap to the actual game
@@ -92,12 +120,10 @@ class SelectionScreen extends Phaser.Scene {
 			}
 			else if ((currentPlayer ==  "2") && (playerChoice != "no selection")){
 				player2Selected = playerChoice;
-				this.scene.start("GameScreen", {player1Choice: player1Selected, player2SChoice: player2Selected});
+				this.scene.start("GameScreen", {player1Choice: player1Selected, player2Choice: player2Selected});
 			}
 		}, this);
 	}
-
-
 }
 
 export default SelectionScreen;

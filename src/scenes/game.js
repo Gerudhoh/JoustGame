@@ -6,12 +6,10 @@ class GameScreen extends Phaser.Scene {
 		super('GameScreen')
 	}
 
-	//This is for passing in the user's choice of what class they want to play as
-	init(data)
+	init (data)
 	{
 	    console.log(data);
 	}
-
 	preload() {
 	  	
 	}
