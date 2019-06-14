@@ -86,11 +86,16 @@ class SelectionScreen extends Phaser.Scene {
 		let yPos = 450;
 
 		//Temporary variables for passing in values to game.js
-		let player1Selected;
-		let player2Selected;
-		let player1Frames;
-		let player2Frames;
+		let playerLeftSelected;
+		let playerRightSelected;
+		let playerLeftFrames;
+		let playerRightFrames;
 		let choiceFrames;
+
+		//Each character has unique stats, represented by data in an array. [0] = strength modifier, [1] = speed modifier, 
+		let stats;
+		let playerLeftStats;
+		let playerRightStats;
 
 		//Text goes here
 		var selectedClass = this.add.text(350, 450, 'No class selected');
@@ -106,11 +111,11 @@ class SelectionScreen extends Phaser.Scene {
 		let playButton = new Button(this, 400, 500, 200, 50, "startButton", this.buttonCallback);
 
 		//Event listeners for when the specific character portraits are clicked.
-		//Update the text stating which character is currently selected
 		portrait1.on('pointerdown', function (event) {
 			playerChoice = this.physics.add.sprite(xPos, yPos, "Isadora", 5);
 			playerChoice.visible = false;
 			choiceFrames = [0, 4, 6, 24];
+			stats = [0, 0];
 			selectedClass.setText('Selected Isadora');
 		}, this);
 
@@ -118,6 +123,7 @@ class SelectionScreen extends Phaser.Scene {
 			playerChoice = this.physics.add.sprite(xPos, yPos, "Forde", 5);
 			playerChoice.visible = false;
 			choiceFrames = [0, 4, 6, 24];
+			stats = [0, 0];
 			selectedClass.setText('Selected Forde');
 		}, this);
 
@@ -125,6 +131,7 @@ class SelectionScreen extends Phaser.Scene {
 			playerChoice = this.physics.add.sprite(xPos, yPos, "Sain", 5);
 			playerChoice.visible = false;
 			choiceFrames = [0, 4, 6, 27];
+			stats = [0, 0];
 			selectedClass.setText('Selected Sain');
 		}, this);
 
@@ -132,6 +139,7 @@ class SelectionScreen extends Phaser.Scene {
 			playerChoice = this.physics.add.sprite(xPos, yPos, "Eliwood", 3);
 			playerChoice.visible = false;
 			choiceFrames = [0, 2, 4, 20];
+			stats = [0, 0];
 			selectedClass.setText('Selected Eliwood');
 		}, this);
 
@@ -139,6 +147,7 @@ class SelectionScreen extends Phaser.Scene {
 			playerChoice = this.physics.add.sprite(xPos, yPos, "Kent", 5);
 			playerChoice.visible = false;
 			choiceFrames = [0, 4, 6, 25];
+			stats = [0, 0];
 			selectedClass.setText('Selected Kent');
 		}, this);
 
@@ -146,6 +155,7 @@ class SelectionScreen extends Phaser.Scene {
 			playerChoice = this.physics.add.sprite(xPos, yPos, "Marcus", 5);
 			playerChoice.visible = false;
 			choiceFrames = [0, 4, 6, 25];
+			stats = [0, 0];
 			selectedClass.setText('Selected Marcus');
 		}, this);
 
@@ -154,18 +164,23 @@ class SelectionScreen extends Phaser.Scene {
 			//Swap to second player's choice
 			if ((currentPlayer ==  "1") && (playerChoice != null)) {
 				currentPlayer = "2";
-				player1Selected = playerChoice;
-				player1Frames = choiceFrames;
+				//Create temp values to pass to game.js
+				playerLeftSelected = playerChoice;
+				playerLeftFrames = choiceFrames;
+				playerLeftStats = stats;
 				xPos = 700;
+				//Reset state
 				playerChoice = null;
 				selectedClass.setText('No class selected');
 				currentPlayerText.setText('Player 2, please select your character.')
 			}
 			//Swap to game and transfer info
 			else if ((currentPlayer ==  "2") && (playerChoice != null)){
-				player2Selected = playerChoice;
-				player2Frames = choiceFrames;
-				this.scene.start("GameScreen", {playerLeftChoice: player1Selected, playerRightChoice: player2Selected, playerLeftFrames: player1Frames, playerRightFrames: player2Frames});
+				//Create temp values to pass to game.js
+				playerRightSelected = playerChoice;
+				playerRightFrames = choiceFrames;
+				playerRightStats = stats;
+				this.scene.start("GameScreen", {playerLeftChoice: playerLeftSelected, playerRightChoice: playerRightSelected, playerLeftFrames: playerLeftFrames, playerRightFrames: playerRightFrames, playerLeftStats: playerLeftStats, playerRightStats: playerRightStats});
 			}
 		}, this);
 	}

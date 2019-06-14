@@ -1,6 +1,3 @@
-import lanceImg1 from "../assets/lance1.png";
-import lanceImg2 from "../assets/lance2.png";
-
 //Creates phaser class for the scene
 class GameScreen extends Phaser.Scene {
 
@@ -18,6 +15,9 @@ class GameScreen extends Phaser.Scene {
 	    //This is the array for which frames to start and stop animation. [0] and [1] is for running, [2] and [3] is for attacking.
 	    this.leftFrameArray = data.playerLeftFrames;
 	    this.rightFrameArray = data.playerRightFrames;
+	    //This is the array representing the stats of a player.
+		this.leftStats = data.playerLeftStats;
+		this.rightStats = data.playerRightStats;
 	}
 	preload() {
 
