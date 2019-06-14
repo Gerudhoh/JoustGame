@@ -1,4 +1,3 @@
-import jousterImg from "../assets/jouster.png";
 import swordImg from "../assets/sword1.png";
 import swordImg2 from "../assets/sword2.png";
 import lanceImg from "../assets/lance1.png";
@@ -12,7 +11,6 @@ class TitleScreen extends Phaser.Scene {
 
 	preload() {
 		//load in the spritesheet for testing
-	  	this.load.spritesheet("jouster", jousterImg, {frameWidth: 60, frameHeight: 74});
 	  	this.load.spritesheet("sword1", swordImg, {frameWidth: 100, frameHeight: 100});
 	  	this.load.spritesheet("sword2", swordImg2, {frameWidth: 100, frameHeight: 100});
 	  	this.load.spritesheet("lance1", lanceImg, {frameWidth: 100, frameHeight: 100});
@@ -124,7 +122,7 @@ class TitleScreen extends Phaser.Scene {
 
 
 	  	//Gets user input to change the scene to the game
-	  	this.input.on('pointerdown', () => this.scene.start('GameScreen'))
+	  	this.input.on('pointerdown', () => this.scene.start('SelectionScreen'))
 	}
 }
 
