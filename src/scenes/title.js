@@ -1,5 +1,6 @@
 import jousterImg from "../assets/jouster.png";
 import swordImg from "../assets/sword1.png";
+import backgroundImg from "../assets/background.png";
 
 class TitleScreen extends Phaser.Scene {
 	//the key that references this class, which is used by other functions
@@ -10,12 +11,14 @@ class TitleScreen extends Phaser.Scene {
 	preload() {
 		//load in the spritesheet for testing
 	  	this.load.spritesheet("jouster", jousterImg, {frameWidth: 60, frameHeight: 74});
-	  	this.load.spritesheet("sword1", swordImg, {frameWidth: 100, frameHeight: 100});
+		this.load.spritesheet("sword1", swordImg, {frameWidth: 100, frameHeight: 100});
+		this.load.image('background', backgroundImg, {frameWidth: 500, frameHeight: 500});
 	}
 
 	create() {
+		this.add.image(400, 300, 'background');
 		//testing for sprites of players
-	 	let jouster = this.add.sprite(300, 200, "sword1", 5);
+		 let jouster = this.add.sprite(300, 450, "sword1", 5);
 
 	 	//running animation goes here
 	  	this.anims.create({
@@ -38,10 +41,10 @@ class TitleScreen extends Phaser.Scene {
 
 	  	//play the 2 animations to test them
 	  	jouster.play('attacking');
-	  	let jouster2 = this.add.sprite(500, 200, "sword1", 0);
+	  	let jouster2 = this.add.sprite(500, 450, "sword1", 0);
 	  	jouster2.play('running');
 
-	  	let titleText = this.add.text(200, 400, "Jousting Game, left click to play game");
+	  	let titleText = this.add.text(200, 500, "Jousting Game, left click to play game");
 
 	  	//Gets user input to change the scene to the game
 	  	this.input.on('pointerdown', () => this.scene.start('GameScreen'))
