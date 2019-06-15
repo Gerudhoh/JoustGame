@@ -102,13 +102,36 @@ class SelectionScreen extends Phaser.Scene {
 		var currentPlayerText = this.add.text(250, 0, 'Player 1, please select your character.');
 
 		//custom buttons for character classes are here
-		let portrait1 = new Button(this, 200, 100, 150, 150, "button1", this.buttonCallback);
-		let portrait2 = new Button(this, 360, 100, 150, 150, "button2", this.buttonCallback);
-		let portrait3 = new Button(this, 520, 100, 150, 150, "button3", this.buttonCallback);
-		let portrait4 = new Button(this, 200, 260, 150, 150, "button4", this.buttonCallback);
-		let portrait5 = new Button(this, 360, 260, 150, 150, "button5", this.buttonCallback);
-		let portrait6 = new Button(this, 520, 260, 150, 150, "button6", this.buttonCallback);
+		let portrait1 = new Button(this, 300, 150, 150, 150, "button1", this.buttonCallback);
+		let portrait2 = new Button(this, 460, 150, 150, 150, "button2", this.buttonCallback);
+		let portrait3 = new Button(this, 620, 150, 150, 150, "button3", this.buttonCallback);
+		let portrait4 = new Button(this, 300, 310, 150, 150, "button4", this.buttonCallback);
+		let portrait5 = new Button(this, 460, 310, 150, 150, "button5", this.buttonCallback);
+		let portrait6 = new Button(this, 620, 310, 150, 150, "button6", this.buttonCallback);
 		let playButton = new Button(this, 400, 500, 200, 50, "startButton", this.buttonCallback);
+
+		//Stat display goes here
+		//Create base rectangle
+		let statContainer = new Phaser.Geom.Rectangle(15, 200, 220, 150);
+		let graphics1 = this.add.graphics({ lineStyle: { color: 0xffffff } });
+		graphics1.strokeRectShape(statContainer);
+		this.add.text(50, 180, "Character Stats");
+
+		let graphics2 = this.add.graphics({ fillStyle: { color: 0xffffff } });
+		
+		//Create strength bars
+		this.add.text(25, 205, "Strength");
+		let strengthBar = new Phaser.Geom.Rectangle(25, 225, 150, 25);
+		let strengthFull = new Phaser.Geom.Rectangle(25, 225, 200, 25);
+		graphics2.fillRectShape(strengthBar);
+		graphics2.strokeRectShape(strengthFull);
+
+		//Create speed bars
+		this.add.text(25, 255, "Speed");
+		let speedBar = new Phaser.Geom.Rectangle(25, 275, 150, 25);
+		let speedFull = new Phaser.Geom.Rectangle(25, 275, 200, 25);
+		graphics2.fillRectShape(speedBar);
+		graphics2.strokeRectShape(speedFull);
 
 		//Event listeners for when the specific character portraits are clicked.
 		portrait1.on('pointerdown', function (event) {
@@ -180,8 +203,13 @@ class SelectionScreen extends Phaser.Scene {
 				playerRightSelected = playerChoice;
 				playerRightFrames = choiceFrames;
 				playerRightStats = stats;
-				this.scene.start("GameScreen", {playerLeftChoice: playerLeftSelected, playerRightChoice: playerRightSelected, playerLeftFrames: playerLeftFrames, playerRightFrames: playerRightFrames, playerLeftStats: playerLeftStats, playerRightStats: playerRightStats});
-			}
+				this.scene.start("GameScreen", {playerLeftChoice: playerLeftSelected,
+												playerRightChoice: playerRightSelected, 
+												playerLeftFrames: playerLeftFrames, 
+												playerRightFrames: playerRightFrames, 
+												playerLeftStats: playerLeftStats, 
+												playerRightStats: playerRightStats});
+				}
 		}, this);
 	}
 }

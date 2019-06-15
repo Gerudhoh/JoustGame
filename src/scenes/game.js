@@ -19,6 +19,7 @@ class GameScreen extends Phaser.Scene {
 		this.leftStats = data.playerLeftStats;
 		this.rightStats = data.playerRightStats;
 	}
+	
 	preload() {
 
 	}
@@ -32,16 +33,16 @@ class GameScreen extends Phaser.Scene {
 		jousterLeft.flipX = true;
 		let jousterRight = this.physics.add.sprite(this.choiceRight.x, this.choiceRight.y, this.choiceRight.texture.key, this.choiceRight.frame.name);
 
-		//This is an attempt to create a unified animation so we don't need spaghetti code
+		//This is an attempt to create a unified animation set so we don't need spaghetti code
+		//Basically, we get information from the choice of character, and modify the spritesheet and frames for each type of animation
 		this.anims.create({
 		key: 'runningLeft',
 		//repeat -1 means it loops
-
 			 repeat: -1,
 			 frameRate: 10,
 			 //Basically you get the key of the certain texture, and using the array passed from the character selection, determine the beginning and end frames
 			 frames: this.anims.generateFrameNames(this.choiceLeft.texture.key, {start: this.leftFrameArray[0], end: this.leftFrameArray[1]})
-		 });
+		});
 
 		this.anims.create({
 		key: 'runningRight',
@@ -50,17 +51,16 @@ class GameScreen extends Phaser.Scene {
 			 frameRate: 10,
 			 //Basically you get the key of the certain texture, and using the array passed from the character selection, determine the beginning and end frames
 			 frames: this.anims.generateFrameNames(this.choiceRight.texture.key, {start: this.rightFrameArray[0], end: this.rightFrameArray[1]})
-		 });
+		});
 
 		this.anims.create({
 		key: 'attackingLeft',
 		//repeat -1 means it loops
-
 			 repeat: -1,
 			 frameRate: 10,
 			 //Basically you get the key of the certain texture, and using the array passed from the character selection, determine the beginning and end frames
 			 frames: this.anims.generateFrameNames(this.choiceLeft.texture.key, {start: this.leftFrameArray[2], end: this.leftFrameArray[3]})
-		 });
+		});
 
 		this.anims.create({
 		key: 'attackingRight',
@@ -69,8 +69,8 @@ class GameScreen extends Phaser.Scene {
 			 frameRate: 10,
 			 //Basically you get the key of the certain texture, and using the array passed from the character selection, determine the beginning and end frames
 			 frames: this.anims.generateFrameNames(this.choiceRight.texture.key, {start: this.rightFrameArray[2], end: this.rightFrameArray[3]})
-		 });
-
+		});
+		//End of animations here
 
 
 		jousterLeft.play('attackingLeft');
