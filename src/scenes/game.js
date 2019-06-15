@@ -15,9 +15,11 @@ class GameScreen extends Phaser.Scene {
 	    //This is the array for which frames to start and stop animation. [0] and [1] is for running, [2] and [3] is for attacking.
 	    this.leftFrameArray = data.playerLeftFrames;
 	    this.rightFrameArray = data.playerRightFrames;
-	    //This is the array representing the stats of a player.
-		this.leftStats = data.playerLeftStats;
-		this.rightStats = data.playerRightStats;
+	    //This is the array representing the stats of a player. Strength is [0] and speed is [1]
+		this.leftStrength = data.playerLeftStats[0];
+		this.leftSpeed = data.playerLeftStats[1];
+		this.rightStrength = data.playerRightStats[0];
+		this.rightSpeed= data.playerRightStats[1];
 	}
 	
 	preload() {
@@ -27,6 +29,8 @@ class GameScreen extends Phaser.Scene {
 	create() {
 		//THIS WHOLE THING IS TESTING
 		console.log(this.choiceLeft);
+		console.log(this.leftStrength);
+		console.log(this.leftSpeed);
 
 		//Because we get a spritesheet object from the character select screen, we need to create the sprite based off of that object.
 		let jousterLeft = this.physics.add.sprite(this.choiceLeft.x, this.choiceLeft.y, this.choiceLeft.texture.key, this.choiceLeft.frame.name);
