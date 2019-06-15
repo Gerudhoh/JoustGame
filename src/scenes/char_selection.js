@@ -121,23 +121,28 @@ class SelectionScreen extends Phaser.Scene {
 		
 		//Create strength bars
 		this.add.text(25, 205, "Strength");
-		let strengthBar = new Phaser.Geom.Rectangle(25, 225, 150, 25);
+		let strengthBar = new Phaser.Geom.Rectangle(25, 225, 0, 25);
 		let strengthFull = new Phaser.Geom.Rectangle(25, 225, 200, 25);
-		graphics2.fillRectShape(strengthBar);
-		graphics2.strokeRectShape(strengthFull);
+		graphics1.strokeRectShape(strengthFull);
 
 		//Create speed bars
 		this.add.text(25, 255, "Speed");
-		let speedBar = new Phaser.Geom.Rectangle(25, 275, 150, 25);
+		let speedBar = new Phaser.Geom.Rectangle(25, 275, 0, 25);
 		let speedFull = new Phaser.Geom.Rectangle(25, 275, 200, 25);
-		graphics2.fillRectShape(speedBar);
-		graphics2.strokeRectShape(speedFull);
+		graphics1.strokeRectShape(speedFull);
 
 		//Event listeners for when the specific character portraits are clicked.
 		portrait1.on('pointerdown', function (event) {
 			playerChoice = this.physics.add.sprite(xPos, yPos, "Isadora", 5);
 			playerChoice.visible = false;
 			choiceFrames = [0, 4, 6, 24];
+			//Display the stats in the stat box
+			graphics2.clear();
+			strengthBar.setSize(150, 25);
+			speedBar.setSize(150, 25);
+			graphics2.fillRectShape(strengthBar);
+			graphics2.fillRectShape(speedBar);
+
 			stats = [0, 0];
 			selectedClass.setText('Selected Isadora');
 		}, this);
@@ -146,6 +151,13 @@ class SelectionScreen extends Phaser.Scene {
 			playerChoice = this.physics.add.sprite(xPos, yPos, "Forde", 5);
 			playerChoice.visible = false;
 			choiceFrames = [0, 4, 6, 24];
+			//Display the stats in the stat box
+			graphics2.clear();
+			strengthBar.setSize(160, 25);
+			speedBar.setSize(160, 25);
+			graphics2.fillRectShape(strengthBar);
+			graphics2.fillRectShape(speedBar);
+
 			stats = [0, 0];
 			selectedClass.setText('Selected Forde');
 		}, this);
