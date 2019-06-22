@@ -203,6 +203,9 @@ class SelectionScreen extends Phaser.Scene {
 
 		//Swap to the actual game
 		playButton.on('pointerdown', function (event) {
+			if (playerChoice == null) {
+				alert("Please select a character before pressing select!");
+			}
 			//Swap to second player's choice
 			if ((currentPlayer ==  "1") && (playerChoice != null)) {
 				currentPlayer = "2";
