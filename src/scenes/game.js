@@ -10,6 +10,9 @@ var rightButton;
 var StrengthWheel;
 //Creates phaser class for the scene
 class GameScreen extends Phaser.Scene {
+	
+	var jousterSpeed = 175;
+	var screenRight = 1000;
 
 	constructor() {
 		//the key that references this class, which is used by other functions
@@ -67,13 +70,13 @@ class GameScreen extends Phaser.Scene {
 	}
 	update(){
 
-		if(jousterRight.x < 0 || jousterLeft.x > 1000){
+		if(jousterRight.x < 0 || jousterLeft.x > screenRight){
 			this.scene.restart();
 		}
 
 		if (cursors.left.isDown)	
 		{
-    		jousterRight.body.setVelocityX(-160);
+    		jousterRight.body.setVelocityX(jousterSpeed*-1);
 			jousterRight.play('runningLeft', true);
 		}
 		else
@@ -83,7 +86,7 @@ class GameScreen extends Phaser.Scene {
 
 	if (rightButton.isDown)	
 		{
-    		jousterLeft.body.setVelocityX(160);
+    		jousterLeft.body.setVelocityX(jousterSpeed);
 			jousterLeft.play('runningRight', true);
 		}
 		else
